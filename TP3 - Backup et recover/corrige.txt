@@ -1,3 +1,33 @@
+#########################     PLEASE CONSIDER THIS STEPS IT'S UPDATE  ##################################################
+#########################     BACKUP    ####################################
+
+En root sur la VM Master, car la base swarm est accessible en root uniquement
+- cd /var/lib/docker/swarm/
+- tar -czvf /tmp/swarm_backup.tar.gz .
+- curl -F "file=@/tmp/swarm_backup.tar.gz" https://file.io 
+NB: SUR LA SORTIE DE L'ECRAN VOUS AUREZ UNE URL SOUS CETTE FORME : https://file.io/qAYUJ8BhKnzz  (BIEN VOULOIR LA CONSERVER)
+
+On detruit le precedent noeud master , ou vous arreter tout simplement le daemon docker de ce noeud Manager
+########################## RESTORE ##########################
+master 
+NB: il faut restaurer sur le même noeud à partir duquel l'on a fait le backup 
+     - curl -OJL https://file.io/qAYUJ8BhKnzz
+     - docker swarm init --force-new-cluster --advertise-addr  192.168.99.10
+
+
+worker
+    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377
+    docker swarm leave
+    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377 
+
+
+
+
+
+
+
+
+
 ########################## BACKUP ##########################
 
 En root sur la VM Master, car la base swarm est accessible en root uniquement
@@ -19,4 +49,4 @@ NB: il faut restaurer sur le même noeud à partir duquel l'on a fait le backup
 worker
     docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377
     docker swarm leave
-    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377    
+    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377 
