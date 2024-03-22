@@ -1,0 +1,6 @@
+Déployez un cluster swarm
+Déployez un service utilisant l’image de nginx:1.18 avec 2 replicas
+Assurez-vous que le déploiement ne sera fait que sur le worker1
+Mettez à jour le déploiement en utilisant l’image nginx:1.20
+Vérifiez que la nouvelle image est bien utilisée
+Faites un retour en arrière

@@ -1,0 +1,21 @@
+Sur le Master   
+     2 - docker swarm init --advertise-addr 192.168.99.10
+
+Sur le worker
+     3 - docker swarm join --token SWMTKN-1-66wd4yh1eo2xtq9g5w2o7barum8qy0nf389f4hir1cgc3gvuv7-d7tx84u37v45lt0d48s85b2sg 192.168.99.10:2377     
+
+Sur le Master     
+     4 - docker node promote worker1
+          docker node ls
+     5 - docker node update  --availability drain  worker1
+           docker node ls
+     6a - docker node demote worker1
+           docker node ls
+
+Sur le worker
+     6b - docker swarm leave     
+
+Sur le Master       
+     6c - docker node rm worker1
+           docker node ls
+

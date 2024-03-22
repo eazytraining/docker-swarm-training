@@ -1,0 +1,4 @@
+Archivez et conservez la base raft (d’un cluster 1 manager + 1 worker)
+Supprimez le noeud master
+Restorez le dossier archivez à la première étape
+Remettez le cluster en état de fonctionnement comme vous l’aviez avant la suppression du dossier swarm

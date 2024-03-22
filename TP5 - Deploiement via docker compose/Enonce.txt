@@ -1,0 +1,6 @@
+Installez docker-compose sur votre cluster
+
+Déployez l’application de gestion de vote suivante: https://github.com/dockersamples/example-voting-app.git
+Il faudra utiliser la stack simple, ie le fichier docker-stack-simple.yml    
+
+Véfifiez que l’application fonctionne

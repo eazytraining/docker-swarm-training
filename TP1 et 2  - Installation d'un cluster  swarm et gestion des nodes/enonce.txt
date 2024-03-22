@@ -1,0 +1,11 @@
+1 - Créer deux machines Centos 7 (ou plusieurs)
+2 - Transformeer la machines 1 en manager swarm
+3 - Rajouter la deuxieme machine comme worker swarm
+4 - Rendez le worker manager
+5 - Passer ce nouveau manager en drain
+6 - Supprimer ce nouvau manager du cluster
+
+
+PS :  Pour avoir les token de mise en clustering
+    * docker swarm join-token manager
+    * docker swarm join-token worker

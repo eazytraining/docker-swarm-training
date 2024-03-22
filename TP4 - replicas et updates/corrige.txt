@@ -1,0 +1,14 @@
+   
+  
+########### Déploiement de l'application ########### 
+docker service create --name webapp --replicas 2 --constraint "node.hostname == worker1" -p 80:80 nginx:1.18
+docker service ls
+docker node ps worker1
+docker service ps webapp
+
+########### Rolling update ########### 
+  docker service update --image nginx:1.20 webapp
+  docker service ps webapp
+  
+########### Rollback ########### 
+ docker service rollback webapp

@@ -1,0 +1,22 @@
+########################## BACKUP ##########################
+
+En root sur la VM Master, car la base swarm est accessible en root uniquement
+- cd /var/lib/docker/swarm/
+- tar -czvf /tmp/swarm_backup.tar.gz .
+- curl --upload-file /tmp/swarm_backup.tar.gz  https://transfer.sh/swarm_backup.tar.gz
+On retient l'URL fournie  : https://transfer.sh/K9WbHD/swarm_backup.tar.gz
+
+On pete la VM Manager (Si impossible, On stop le démon docker)
+
+########################## RESTORE ##########################
+master 
+NB: il faut restaurer sur le même noeud à partir duquel l'on a fait le backup 
+     curl https://transfer.sh/K9WbHD/swarm_backup.tar.gz --output swarm_backup.tar.gz
+     #root# tar -xzvf swarm_backup.tar.gz  -C /var/lib/docker/swarm/
+     docker swarm init --force-new-cluster --advertise-addr  192.168.99.10
+     docker node ls
+
+worker
+    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377
+    docker swarm leave
+    docker swarm join --token SWMTKN-1-3tbnwnvo88p7xd7qubv1nxjdydddx5pvs0kclkpy6fjxzeg0kb-bndts7sm813n258bswsvszz67 192.168.99.10:2377    
